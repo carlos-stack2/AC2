@@ -1,0 +1,85 @@
+<h2>Formulário de Reserva de Viagem</h2>
+
+<form [formGroup]="reservaForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label for="destino">Destino</label>
+    <select id="destino" 
+            formControlName="destino"
+            [ngClass]="{ 'campo-invalido': destino?.invalid && destino?.touched }">
+      
+      <option value="" disabled>Selecione um destino...</option>
+      <option *ngFor="let dest of destinosDisponiveis" [value]="dest">
+        {{ dest }}
+      </option>
+    </select>
+    
+    <div *ngIf="destino?.invalid && (destino?.touched || formEnviado)" class="error-message">
+      <span *ngIf="destino?.errors?.['required']">
+        Destino é obrigatório.
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dataIda">Data de Ida</label>
+    <input type="date" id="dataIda" 
+           formControlName="dataIda"
+           [ngClass]="{ 'campo-invalido': dataIda?.invalid && dataIda?.touched }">
+    
+    <div *ngIf="dataIda?.invalid && (dataIda?.touched || formEnviado)" class="error-message">
+      <span *ngIf="dataIda?.errors?.['required']">
+        Data de ida é obrigatória.
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dataVolta">Data de Volta</label>
+    <input type="date" id="dataVolta" 
+           formControlName="dataVolta"
+           [ngClass]="{ 'campo-invalido': dataVolta?.invalid && dataVolta?.touched }">
+    
+    <div *ngIf="dataVolta?.invalid && (dataVolta?.touched || formEnviado)" class="error-message">
+      <span *ngIf="dataVolta?.errors?.['required']">
+        Data de volta é obrigatória.
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="numeroPassageiros">Número de Passageiros</label>
+    <input type="number" id="numeroPassageiros" 
+           formControlName="numeroPassageiros"
+           [ngClass]="{ 'campo-invalido': numeroPassageiros?.invalid && numeroPassageiros?.touche }">
+    
+    <div *ngIf="numeroPassageiros?.invalid && (numeroPassageiros?.touched || formEnviado)" class="error-message">
+      <span *ngIf="numeroPassageiros?.errors?.['required']">
+        Campo obrigatório.
+      </span>
+      <span *ngIf="numeroPassageiros?.errors?.['min'] || numeroPassageiros?.errors?.['max']">
+        O número de passageiros deve estar entre 1 e 5.
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="emailContato">E-mail de Contato</label>
+    <input type="email" id="emailContato" 
+           formControlName="emailContato" 
+           placeholder="exemplo@dominio.com"
+           [ngClass]="{ 'campo-invalido': emailContato?.invalid && emailContato?.touched }">
+    
+    <div *ngIf="emailContato?.invalid && (emailContato?.touched || formEnviado)" class="error-message">
+      <span *ngIf="emailContato?.errors?.['required']">
+        E-mail é obrigatório.
+      </span>
+      <span *ngIf="emailContato?.errors?.['email']">
+        Insira um e-mail válido.
+      </span>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="reservaForm.invalid">Reservar Viagem</button>
+
+</form>
