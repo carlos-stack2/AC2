@@ -51,7 +51,7 @@
     <label for="numeroPassageiros">Número de Passageiros</label>
     <input type="number" id="numeroPassageiros" 
            formControlName="numeroPassageiros"
-           [ngClass]="{ 'campo-invalido': numeroPassageiros?.invalid && numeroPassageiros?.touche }">
+           [ngClass]="{ 'campo-invalido': numeroPassageiros?.invalid && numeroPassageiros?.touched }">
     
     <div *ngIf="numeroPassageiros?.invalid && (numeroPassageiros?.touched || formEnviado)" class="error-message">
       <span *ngIf="numeroPassageiros?.errors?.['required']">
@@ -81,5 +81,6 @@
   </div>
 
   <button type="submit" [disabled]="reservaForm.invalid">Reservar Viagem</button>
+
 
 </form>
